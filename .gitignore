@@ -133,6 +133,13 @@ _TeamCity*
 !.axoCover/settings.json
 
 # Visual Studio code coverage results
+
+
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
 *.coverage
 *.coveragexml
 
