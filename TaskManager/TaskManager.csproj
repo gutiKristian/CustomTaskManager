@@ -62,9 +62,13 @@
             <DependentUpon>MainWindow.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Page Include="ProcessWindow.xaml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Models\CustomProcess.cs" />
+        <Compile Include="ProcessWindow.xaml.cs">
+          <DependentUpon>ProcessWindow.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Properties\AssemblyInfo.cs">
             <SubType>Code</SubType>
         </Compile>
