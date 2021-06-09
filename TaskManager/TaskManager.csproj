@@ -58,6 +58,7 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Utils\WindowsPC.cs" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -77,6 +78,7 @@
         <Compile Include="ProcessWindow.xaml.cs">
           <DependentUpon>ProcessWindow.xaml</DependentUpon>
         </Compile>
+        <Compile Include="Properties\Annotations.cs" />
         <Compile Include="Properties\AssemblyInfo.cs">
             <SubType>Code</SubType>
         </Compile>

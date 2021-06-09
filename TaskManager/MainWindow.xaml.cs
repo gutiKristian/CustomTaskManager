@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using TaskManager.Models;
 
 namespace TaskManager
 {
@@ -13,12 +13,15 @@ namespace TaskManager
     /// </summary>
     public partial class MainWindow
     {
+
+        
         // Demo purpose ! It is goind to be moved elsewhere
         private List<Process> _processes;
         
         public MainWindow()
         {
             InitializeComponent();
+            this.DataContext = new CustomProcess();
             
             _processes = Process.GetProcesses().ToList();
             processGrid.ItemsSource = _processes;

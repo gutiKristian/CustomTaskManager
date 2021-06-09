@@ -3,11 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:TaskManager"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="400" MinWidth="650" Height="400" Width="650">
-    
- 
+        Title="PV178 Task Manager" MinHeight="400" MinWidth="650" Height="400" Width="650">
     
     <Grid>
         <!-- LAYOUT DEFINITION -->
@@ -25,7 +24,7 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
         
-        <!-- LAYOUT HIGHLIGHTING -->
+        <!-- LAYOUT HIGHLIGHTING 
         <Rectangle Fill="Black" IsHitTestVisible="False" Grid.Column="0" Grid.Row="0"/>
         <Rectangle Fill="Black" IsHitTestVisible="False" Grid.Column="1" Grid.Row="0"/>
         <Rectangle Fill="Black" IsHitTestVisible="False" Grid.Column="2" Grid.Row="0"/>
@@ -45,6 +44,7 @@
         <Rectangle Fill="Black" IsHitTestVisible="False" Grid.Column="3" Grid.Row="1"/>
         <Rectangle Fill="Black" IsHitTestVisible="False" Grid.Column="3" Grid.Row="2"/>
         <Rectangle Fill="Black" IsHitTestVisible="False" Grid.Column="3" Grid.Row="3"/>
+        -->
         
         <DataGrid Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" x:Name="processGrid" AutoGenerateColumns="False"
                   GridLinesVisibility="None" IsReadOnly="True" CanUserResizeRows="False">
@@ -96,8 +96,7 @@
             <TextBlock  FontSize="15" Text="CPU: "/>
             <TextBlock  FontSize="15" Text="RAM: "/>
         </StackPanel>
-        <Image Grid.Column="1" Grid.Row="2" Source="C:\Users\krist\Desktop\img1.jpg"/>
-        <Image Grid.Column="1" Grid.Row="3" Source="C:\Users\krist\Desktop\img1.jpg"/>
+        <lvc:CartesianChart Grid.Column="1" Grid.Row="3" Series="{Binding SeriesCollection }"/>
         
         
         
