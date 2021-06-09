@@ -1,2 +1,2 @@
 # CustomTaskManager
-PV178 project
+Introduction to Development in C#/.NET (PV178) project
