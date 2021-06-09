@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Models;
+using System.Diagnostics;
 
 namespace TaskManager
 {
@@ -26,6 +27,7 @@ namespace TaskManager
             _processes = Process.GetProcesses().ToList();
             processGrid.ItemsSource = _processes;
             // processList.ItemsSource = _processes;
+            
         }
 
         private void Process_DoubleClick(object sender, MouseButtonEventArgs e)

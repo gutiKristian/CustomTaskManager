@@ -6,7 +6,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:TaskManager"
         mc:Ignorable="d"
-        Title="PV178 Task Manager" MinHeight="400" MinWidth="650" Height="400" Width="650">
+        Title="PV178 Task Manager" MinHeight="400" MinWidth="600" Height="800" Width="1000">
     
     <Grid>
         <!-- LAYOUT DEFINITION -->
@@ -92,9 +92,12 @@
         -->
         
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <TextBlock FontSize="15" Text="NAME: "/>
-            <TextBlock  FontSize="15" Text="CPU: "/>
-            <TextBlock  FontSize="15" Text="RAM: "/>
+            <TextBlock  FontSize="18" Text="PC NAME"/>
+            <TextBlock FontSize="15" Text="{Binding PcInfo.PcName}"/>
+            <TextBlock  FontSize="18" Text="CPU"/>
+            <TextBlock FontSize="15" Text="{Binding PcInfo.CpuName}"/>
+            <TextBlock  FontSize="18" Text="RAM"/>
+            <TextBlock FontSize="15" Text="{Binding PcInfo.RamCapacity}"/>
         </StackPanel>
         <lvc:CartesianChart Grid.Column="1" Grid.Row="3" Series="{Binding SeriesCollection }"/>
         

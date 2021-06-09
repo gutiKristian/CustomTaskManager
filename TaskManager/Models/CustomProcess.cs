@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using TaskManager.Annotations;
 using LiveCharts;
 using LiveCharts.Wpf;
+using TaskManager.Utils;
 
 namespace TaskManager.Models
 {
@@ -18,10 +19,13 @@ namespace TaskManager.Models
         public SeriesCollection SeriesCollection { get; set; }
 
         public ConnectionState ConnectionState;
-        
+
+        public WindowsPC PcInfo { get; }
 
         public CustomProcess()
         {
+            PcInfo = new WindowsPC();
+            
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
