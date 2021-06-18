@@ -15,7 +15,7 @@ namespace TaskManager.Utils
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         
-        public void Set<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        protected void Set<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
             if (!EqualityComparer<T>.Default.Equals(value, field))
             {

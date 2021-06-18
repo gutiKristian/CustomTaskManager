@@ -60,6 +60,7 @@
             <SubType>Designer</SubType>
         </ApplicationDefinition>
         <Compile Include="Models\ProcessContext.cs" />
+        <Compile Include="Utils\CustomProcess.cs" />
         <Compile Include="Utils\NotifyPropertyChanged.cs" />
         <Compile Include="Utils\WindowsPC.cs" />
         <Page Include="MainWindow.xaml">
