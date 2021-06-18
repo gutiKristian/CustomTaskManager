@@ -27,7 +27,7 @@ namespace TaskManager.Models
      */
     public class MainContext : NotifyPropertyChanged
     {
-        public SeriesCollection SeriesCollection { get; set; }
+        public SeriesCollection CpuCollection { get; set; }
         public SeriesCollection RamCollection { get; set; }
         
         public WindowsPC PcInfo { get; }
@@ -41,7 +41,7 @@ namespace TaskManager.Models
             PcInfo = new WindowsPC();
             Processes = new ObservableCollection<Process>(Process.GetProcesses());
             
-            SeriesCollection = new SeriesCollection
+            CpuCollection = new SeriesCollection
             {
                 new LineSeries
                 {
@@ -66,7 +66,7 @@ namespace TaskManager.Models
            
             
             BindingOperations.EnableCollectionSynchronization(Processes, _itemsLock);
-            BindingOperations.EnableCollectionSynchronization(SeriesCollection, _itemsLock);
+            BindingOperations.EnableCollectionSynchronization(CpuCollection, _itemsLock);
             BindingOperations.EnableCollectionSynchronization(RamCollection, _itemsLock);
             Task.Run(Updater);
             Task.Run(UpdateResourceUsage);
@@ -124,8 +124,8 @@ namespace TaskManager.Models
             {
                 Thread.Sleep(1000);
                 
-                SeriesCollection[0].Values.Add(PcInfo.CpuStatus());
-                SeriesCollection[0].Values.RemoveAt(0);
+                CpuCollection[0].Values.Add(PcInfo.CpuStatus());
+                CpuCollection[0].Values.RemoveAt(0);
                 
                 RamCollection[0].Values.Add(PcInfo.RamStatus());
                 RamCollection[0].Values.RemoveAt(0);
