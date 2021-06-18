@@ -103,10 +103,10 @@
         
         <lvc:CartesianChart Grid.Column="1" Grid.Row="3" Name="sl"  Series="{Binding SeriesCollection}">
             <lvc:CartesianChart.AxisX>
-                <lvc:Axis Title="Month" x:Name="slx" LabelFormatter="{Binding XFormatter}"/>
+                <lvc:Axis x:Name="slx" LabelFormatter="{Binding XFormatter}"/>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Sales" x:Name="slY" LabelFormatter="{Binding YFormatter}"/>
+                <lvc:Axis x:Name="slY" LabelFormatter="{Binding YFormatter}"/>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
         

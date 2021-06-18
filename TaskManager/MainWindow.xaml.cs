@@ -36,9 +36,11 @@ namespace TaskManager
             }
 
             slY.Labels = l;
-            slx.Labels = new List<string>() {"1", "2", "3", "4", "5", "6"};
-            slY.Title = "Percentage";
-            slx.Title = "Samples";
+            slY.Title = "CPU usage in %";
+            slY.FontSize = 14;
+            slY.FontWeight = FontWeight.FromOpenTypeWeight(20);
+            slx.Title = "";
+            slx.ShowLabels = false;
 
         }
         
