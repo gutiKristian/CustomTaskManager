@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
@@ -6,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Models;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace TaskManager
 {
@@ -14,21 +17,17 @@ namespace TaskManager
     /// </summary>
     public partial class MainWindow
     {
+        private MainContext context;
 
-        
-        // Demo purpose ! It is goind to be moved elsewhere
-        private List<Process> _processes;
-        
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new CustomProcess();
-            
-            _processes = Process.GetProcesses().ToList();
-            processGrid.ItemsSource = _processes;
-            // processList.ItemsSource = _processes;
-            
+            // Create context variable and set the context
+            context = new MainContext();
+            this.DataContext = context;
         }
+        
+        
 
         private void Process_DoubleClick(object sender, MouseButtonEventArgs e)
         {

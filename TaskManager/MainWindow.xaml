@@ -46,8 +46,9 @@
         <Rectangle Fill="Black" IsHitTestVisible="False" Grid.Column="3" Grid.Row="3"/>
         -->
         
-        <DataGrid Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" x:Name="processGrid" AutoGenerateColumns="False"
-                  GridLinesVisibility="None" IsReadOnly="True" CanUserResizeRows="False">
+       
+        <DataGrid Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" x:Name="processGrid" AutoGenerateColumns="False" 
+                  GridLinesVisibility="None" IsReadOnly="True" CanUserResizeRows="False" ItemsSource="{Binding Processes}">
             
             <DataGrid.Resources>
                 <Style TargetType="{x:Type DataGridCell}">
@@ -67,9 +68,9 @@
                 <DataGridTextColumn Header="Physical Memory Usage" Binding="{Binding WorkingSet64}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        
-       <!-- PROCESS DATA
-        <ListBox x:Name="processList" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3">
+       
+       <!-- PROCESS DATA 
+        <ListBox x:Name="processList" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" ItemsSource="{Binding Processes}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="5">
@@ -79,7 +80,7 @@
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
-        </ListBox>  --> 
+        </ListBox> -->
         
         <!-- GRAPH SECTION Grid.Column="1" Grid.Row="13" -->
         

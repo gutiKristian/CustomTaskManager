@@ -59,6 +59,7 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
+        <Compile Include="Utils\NotifyPropertyChanged.cs" />
         <Compile Include="Utils\WindowsPC.cs" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
@@ -75,7 +76,7 @@
         <Page Include="ProcessWindow.xaml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Models\CustomProcess.cs" />
+        <Compile Include="Models\MainContext.cs" />
         <Compile Include="ProcessWindow.xaml.cs">
           <DependentUpon>ProcessWindow.xaml</DependentUpon>
         </Compile>
