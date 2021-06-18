@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Net.Mime;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Annotations;
@@ -42,24 +44,23 @@ namespace TaskManager.Models
             {
                 new LineSeries
                 {
-                    Values = new ChartValues<double> {3, 5, 7, 4}
-                },
-                new ColumnSeries
-                {
-                    Values = new ChartValues<decimal> {5, 6, 2, 7}
+                    Values = new ChartValues<int> {0, 1, 2 ,3,  45, 5 },
+                    Title = "CPU",
+                    LineSmoothness = 1,
+                    PointGeometry = null
                 }
             };
             
             BindingOperations.EnableCollectionSynchronization(Processes, _itemsLock);
+            BindingOperations.EnableCollectionSynchronization(SeriesCollection, _itemsLock);
             Task.Run(Updater);
+            Task.Run(UpdateResourceUsage);
         }
         
         
         /*
          * Updating UI with data 
          */
-        
-        
         private void Updater()
         {
             while (true)
@@ -100,7 +101,18 @@ namespace TaskManager.Models
                 ++current;
             }
         }
-        
+
+        private void UpdateResourceUsage()
+        {
+            
+            while (true)
+            {
+                Thread.Sleep(1000);
+                SeriesCollection[0].Values.Add(PcInfo.CpuStatus());
+                SeriesCollection[0].Values.RemoveAt(0);
+                
+            }
+        }
 
     }
 }

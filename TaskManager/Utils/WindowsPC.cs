@@ -1,4 +1,5 @@
-﻿using System.Management;
+﻿using System;
+using System.Management;
 using Microsoft.Win32;
 
 namespace TaskManager.Utils
@@ -26,6 +27,18 @@ namespace TaskManager.Utils
             // Memory visible to OS
             RamCapacity = ExtractWin32Information("Win32_OperatingSystem", "TotalVisibleMemorySize");
             RamCapacity = (float.Parse(RamCapacity) / 1024).ToString() + "MB";
+        }
+
+        public int CpuStatus()
+        {
+            try
+            {
+                return Int32.Parse(ExtractWin32Information("Win32_Processor", "LoadPercentage"));
+            }
+            catch (OverflowException e)
+            {
+                return 0;
+            }
         }
 
         private string ExtractWin32Information(string querySpec, string information)

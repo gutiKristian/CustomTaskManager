@@ -24,7 +24,22 @@ namespace TaskManager
             InitializeComponent();
             // Create context variable and set the context
             context = new MainContext();
+            
+            
             this.DataContext = context;
+
+            var l = new List<string>();
+            
+            for (int i = 0; i < 100; i++)
+            {
+                l.Add(i.ToString());
+            }
+
+            slY.Labels = l;
+            slx.Labels = new List<string>() {"1", "2", "3", "4", "5", "6"};
+            slY.Title = "Percentage";
+            slx.Title = "Samples";
+
         }
         
         
