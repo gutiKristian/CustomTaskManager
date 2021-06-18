@@ -1,18 +1,15 @@
 ﻿using System.Diagnostics;
 using System.Windows;
+using TaskManager.Models;
 
 namespace TaskManager
 {
     public partial class ProcessWindow : Window
     {
-        public Process Data { get; }
         public ProcessWindow(Process data)
         {
-            Data = data;
-            
             InitializeComponent();
-            
-            selectedProcess.Text = $"Selected process: {Data.ProcessName}";
+            this.DataContext = new ProcessContext(data);
         }
     }
 }
