@@ -42,6 +42,13 @@ namespace TaskManager
             slx.Title = "";
             slx.ShowLabels = false;
 
+            ramY.Labels = l;
+            ramY.Title = "RAM usage in %";
+            ramY.FontSize = 14;
+            ramY.FontWeight = FontWeight.FromOpenTypeWeight(20);
+            ramX.Title = "";
+            ramX.ShowLabels = false;
+
         }
         
         

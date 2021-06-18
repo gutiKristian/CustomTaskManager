@@ -20,13 +20,16 @@ namespace TaskManager.Utils
         public string CpuName { get; }
         public string RamCapacity { get; }
 
+        private Double fRamCapacity;
+
         public WindowsPC()
         {
             CpuName = ExtractWin32Information("Win32_Processor", "Name");
             PcName = ExtractWin32Information("Win32_Processor", "SystemName");
             // Memory visible to OS
             RamCapacity = ExtractWin32Information("Win32_OperatingSystem", "TotalVisibleMemorySize");
-            RamCapacity = (float.Parse(RamCapacity) / 1024).ToString() + "MB";
+            fRamCapacity = Double.Parse(RamCapacity) / 1024;
+            RamCapacity = fRamCapacity.ToString() + "MB";
         }
 
         public int CpuStatus()
@@ -34,6 +37,18 @@ namespace TaskManager.Utils
             try
             {
                 return Int32.Parse(ExtractWin32Information("Win32_Processor", "LoadPercentage"));
+            }
+            catch (OverflowException e)
+            {
+                return 0;
+            }
+        }
+
+        public double RamStatus()
+        {
+            try
+            {
+                return 100 - Math.Round((Double.Parse(ExtractWin32Information("Win32_OperatingSystem", "FreePhysicalMemory")) / (fRamCapacity * 1024)), 2) * 100;
             }
             catch (OverflowException e)
             {
