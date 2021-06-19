@@ -34,7 +34,7 @@ namespace TaskManager
             {
                 l.Add(i.ToString());
             }
-
+            
             slY.Labels = l;
             slY.Title = "CPU usage in %";
             slY.FontSize = 14;

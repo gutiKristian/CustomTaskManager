@@ -2,6 +2,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using TaskManager.Utils;
+using LiveCharts;
+using System.Windows.Data;
+using LiveCharts.Wpf;
 
 namespace TaskManager.Models
 {
@@ -12,8 +15,9 @@ namespace TaskManager.Models
         private string _ramusageS;
 
         private CustomProcess _customProcess;
-        
-        
+
+        private readonly object _itemsLock = new object();
+
         // Public
         public Process CurrentProcess { get; }
         
@@ -31,13 +35,28 @@ namespace TaskManager.Models
 
             set => Set<string>(ref _ramusageS, value);
         }
-        
+
+        public SeriesCollection CpuCollection { get; set; }
+
         // Methods
-        
+
         public ProcessContext(Process data)
         {
             CurrentProcess = data;
             _customProcess = new CustomProcess();
+
+            CpuCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Values = new ChartValues<int> {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                    Title = "CPU",
+                    LineSmoothness = 1,
+                    LabelPoint = (ChartPoint p) =>  $"{p.Y}%",
+                }
+            };
+            
+            BindingOperations.EnableCollectionSynchronization(CpuCollection, _itemsLock);
             // In order to stay responsive run updater from another thread
             Task.Run(Update);
         }
@@ -51,20 +70,20 @@ namespace TaskManager.Models
             while (true)
             {
                 // not thread safe
-                double a = cpuCounter.NextValue(); // must be done twice
+                cpuCounter.NextValue(); // must be done twice
                 Thread.Sleep(1000);
-                double ramUsag = ramCounter.NextValue();
-                double cpuPerc = cpuCounter.NextValue();
+                // Get values
+                float ramUsag = ramCounter.NextValue();
+                float cpuPerc = cpuCounter.NextValue();
+                // update graph
+                int cpuP = (int)cpuPerc;
+                CpuCollection[0].Values.Add(cpuP);
+                CpuCollection[0].Values.RemoveAt(0);
+
                 // Enviroment process count
                 CpuUsageS = cpuPerc + "%";
                 
                 RamUsageS = $"{ramUsag / 1048576} MB";
-                // cs
-                lock (_customProcess)
-                {
-                    _customProcess.AddRamValue(ramUsag);
-                    _customProcess.AddCpuValue((int) cpuPerc);    
-                }
                 
             }
             
