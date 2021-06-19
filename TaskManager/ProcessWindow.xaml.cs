@@ -30,13 +30,14 @@ namespace TaskManager
         {
             recordBtn.IsEnabled = false;
             saveRecordBtn.IsEnabled = true;
+            context.Record = true;
         }
 
         private void SaveRecord_Click(object sender, RoutedEventArgs e)
         {
             recordBtn.IsEnabled = true;
             saveRecordBtn.IsEnabled = false;
-           
+            context.SaveRecord = true;
         }
     }
 }

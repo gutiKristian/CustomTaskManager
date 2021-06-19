@@ -119,6 +119,8 @@ namespace TaskManager.Models
                         if (SaveRecord)
                         {
                             // generate file
+                            Record = false;
+                            SaveRecord = false;
                         }
                     }
                     
