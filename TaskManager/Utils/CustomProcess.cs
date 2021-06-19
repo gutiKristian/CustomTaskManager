@@ -18,7 +18,7 @@ namespace TaskManager.Utils
             cpuPercentageUsage.Add(val);
         }
 
-        public void AddRamValue(double val)
+        public void AddRamValue(float val)
         {
             ramUsage.Add(val);
         }
