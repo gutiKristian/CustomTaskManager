@@ -27,6 +27,8 @@ namespace TaskManager.Models
         public bool Record { get; set; }
         public bool SaveRecord { get; set; }
         
+        public DateTime RecordStart { get; set; }
+        
         // Properties for UI
         public string CpuUsageS
         {
@@ -82,10 +84,15 @@ namespace TaskManager.Models
 
         private void Update()
         {
-            PerformanceCounter cpuCounter =
-                new PerformanceCounter("Process", "% Processor Time", CurrentProcess.ProcessName, true);
-            PerformanceCounter ramCounter =
-                new PerformanceCounter("Process", "Working Set", CurrentProcess.ProcessName, true);
+            PerformanceCounter cpuCounter;
+            PerformanceCounter ramCounter;
+            
+            lock (CurrentProcess)
+            {
+                cpuCounter = new PerformanceCounter("Process", "% Processor Time", CurrentProcess.ProcessName, true);
+                ramCounter = new PerformanceCounter("Process", "Working Set", CurrentProcess.ProcessName, true);
+            }
+            
             while (true)
             {
                 // not thread safe
@@ -121,6 +128,8 @@ namespace TaskManager.Models
                             // generate file
                             Record = false;
                             SaveRecord = false;
+                            _customProcess.GenerateReport();
+                            _customProcess.Duration = DateTime.Now - RecordStart;
                         }
                     }
                     

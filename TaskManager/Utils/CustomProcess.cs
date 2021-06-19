@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TaskManager.Utils
 {
@@ -7,6 +8,8 @@ namespace TaskManager.Utils
         private List<int> cpuPercentageUsage;
         
         private List<float> ramUsage;
+
+        public TimeSpan Duration { get; set; }
 
         public CustomProcess()
         {
@@ -27,6 +30,11 @@ namespace TaskManager.Utils
         {
             cpuPercentageUsage = new List<int>();
             ramUsage = new List<float>();
+        }
+
+        public void GenerateReport()
+        {
+            // average, max, duration
         }
     }
 }

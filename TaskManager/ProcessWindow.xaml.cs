@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using TaskManager.Models;
 using System.Collections.Generic;
@@ -31,6 +32,7 @@ namespace TaskManager
             recordBtn.IsEnabled = false;
             saveRecordBtn.IsEnabled = true;
             context.Record = true;
+            context.RecordStart = DateTime.Now;
         }
 
         private void SaveRecord_Click(object sender, RoutedEventArgs e)
