@@ -120,7 +120,7 @@ namespace TaskManager.Models
                 {
                     lock (_customProcess)
                     {
-                        _customProcess.AddCpuValue(cpuP);
+                        _customProcess.AddCpuValue(cpuPerc);
                         _customProcess.AddRamValue(ramUsag);
 
                         if (SaveRecord)

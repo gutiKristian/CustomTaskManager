@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace TaskManager.Utils
 {
     public class CustomProcess
     {
-        private List<int> cpuPercentageUsage;
+        private List<float> cpuPercentageUsage;
         
         private List<float> ramUsage;
 
@@ -16,7 +18,7 @@ namespace TaskManager.Utils
             this.ResetRecording();
         }
 
-        public void AddCpuValue(int val)
+        public void AddCpuValue(float val)
         {
             cpuPercentageUsage.Add(val);
         }
@@ -28,13 +30,30 @@ namespace TaskManager.Utils
 
         public void ResetRecording()
         {
-            cpuPercentageUsage = new List<int>();
+            cpuPercentageUsage = new List<float>();
             ramUsage = new List<float>();
+        }
+
+        public void GenerateCsv(string path)
+        {
+            using (StreamWriter streamWriter = new StreamWriter(path))
+            {
+                streamWriter.WriteLine("CpuPercentageUsage, RamMBUsage");
+                for (int i = 0; i < cpuPercentageUsage.Count; ++i)
+                {
+                    streamWriter.WriteLine($"{cpuPercentageUsage[i].ToString().Replace(',', '.')}, {ramUsage[i].ToString().Replace(',', '.')}");
+                }
+            }
         }
 
         public void GenerateReport()
         {
+            GenerateCsv("C:\\Users\\krist\\Desktop\\record.csv");
             // average, max, duration
+            float cpuAverage = cpuPercentageUsage.Average();
+            float ramAverage = ramUsage.Average();
+            float cpuMax = cpuPercentageUsage.Max();
+            float ramMax = ramUsage.Max();
         }
     }
 }
