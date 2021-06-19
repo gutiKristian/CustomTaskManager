@@ -121,16 +121,23 @@ namespace TaskManager.Models
 
         private void UpdateResourceUsage()
         {
-            
             while (true)
             {
                 Thread.Sleep(1000);
                 
-                CpuCollection[0].Values.Add(PcInfo.CpuStatus());
-                CpuCollection[0].Values.RemoveAt(0);
+                lock (CpuCollection)
+                {
+                    CpuCollection[0].Values.Add(PcInfo.CpuStatus());
+                    CpuCollection[0].Values.RemoveAt(0);
+                }
                 
-                RamCollection[0].Values.Add(PcInfo.RamStatus());
-                RamCollection[0].Values.RemoveAt(0);
+                lock (RamCollection)
+                {
+                    RamCollection[0].Values.Add(PcInfo.RamStatus());
+                    RamCollection[0].Values.RemoveAt(0);
+                }
+                
+                
             }
         }
 

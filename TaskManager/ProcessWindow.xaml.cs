@@ -7,10 +7,12 @@ namespace TaskManager
 {
     public partial class ProcessWindow : Window
     {
+        private ProcessContext context;
         public ProcessWindow(Process data)
         {
             InitializeComponent();
-            this.DataContext = new ProcessContext(data);
+            context = new ProcessContext(data);
+            this.DataContext = context;
 
             var l = new List<string>();
 
@@ -22,6 +24,19 @@ namespace TaskManager
             cpy.Labels = l;
             
 
+        }
+
+        private void Record_Click(object sender, RoutedEventArgs e)
+        {
+            recordBtn.IsEnabled = false;
+            saveRecordBtn.IsEnabled = true;
+        }
+
+        private void SaveRecord_Click(object sender, RoutedEventArgs e)
+        {
+            recordBtn.IsEnabled = true;
+            saveRecordBtn.IsEnabled = false;
+           
         }
     }
 }

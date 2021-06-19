@@ -5,6 +5,7 @@ using TaskManager.Utils;
 using LiveCharts;
 using System.Windows.Data;
 using LiveCharts.Wpf;
+using System;
 
 namespace TaskManager.Models
 {
@@ -20,6 +21,11 @@ namespace TaskManager.Models
 
         // Public
         public Process CurrentProcess { get; }
+        // Record - whether we are recording meassured values, SaveRecord - when both Record and SaveRecord are
+        // true, we will generate output files, both variables serve as flag whether to start recording or save the data
+        // in different thread
+        public bool Record { get; set; }
+        public bool SaveRecord { get; set; }
         
         // Properties for UI
         public string CpuUsageS
@@ -37,6 +43,7 @@ namespace TaskManager.Models
         }
 
         public SeriesCollection CpuCollection { get; set; }
+        public SeriesCollection RamCollection { get; set; }
 
         // Methods
 
@@ -44,6 +51,7 @@ namespace TaskManager.Models
         {
             CurrentProcess = data;
             _customProcess = new CustomProcess();
+            Record = false;
 
             CpuCollection = new SeriesCollection
             {
@@ -55,7 +63,18 @@ namespace TaskManager.Models
                     LabelPoint = (ChartPoint p) =>  $"{p.Y}%",
                 }
             };
-            
+
+            RamCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Values = new ChartValues<float> {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                    Title = "RAM",
+                    LineSmoothness = 1,
+                    LabelPoint = (ChartPoint p) =>  $"{p.Y}MB",
+                }
+            };
+            // https://docs.microsoft.com/en-us/dotnet/api/system.windows.data.bindingoperations.enablecollectionsynchronization?view=net-5.0
             BindingOperations.EnableCollectionSynchronization(CpuCollection, _itemsLock);
             // In order to stay responsive run updater from another thread
             Task.Run(Update);
@@ -73,21 +92,44 @@ namespace TaskManager.Models
                 cpuCounter.NextValue(); // must be done twice
                 Thread.Sleep(1000);
                 // Get values
-                float ramUsag = ramCounter.NextValue();
+                float ramUsag = ramCounter.NextValue() / 1048576;
                 float cpuPerc = cpuCounter.NextValue();
                 // update graph
                 int cpuP = (int)cpuPerc;
-                CpuCollection[0].Values.Add(cpuP);
-                CpuCollection[0].Values.RemoveAt(0);
 
-                // Enviroment process count
-                CpuUsageS = cpuPerc + "%";
+                lock(CpuCollection)
+                {
+                    CpuCollection[0].Values.Add(cpuP);
+                    CpuCollection[0].Values.RemoveAt(0);
+                }
+
+                lock (RamCollection)
+                {
+                   RamCollection[0].Values.Add(ramUsag);
+                   RamCollection[0].Values.RemoveAt(0);
+                }
+
+                if (Record)
+                {
+                    lock (_customProcess)
+                    {
+                        _customProcess.AddCpuValue(cpuP);
+                        _customProcess.AddRamValue(ramUsag);
+
+                        if (SaveRecord)
+                        {
+                            // generate file
+                        }
+                    }
+                    
+                }
                 
-                RamUsageS = $"{ramUsag / 1048576} MB";
+                // Enviroment process count, multiproc pcs, we show 200% instead of 2 processors are being 100% used
+                CpuUsageS = $"{Math.Round(cpuPerc, 2)}%";
+                RamUsageS = $"{Math.Round(ramUsag, 2)} MB";
                 
             }
-            
-            // auto save ?
+           
         }
         
     }

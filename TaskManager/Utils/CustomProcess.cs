@@ -6,7 +6,7 @@ namespace TaskManager.Utils
     {
         private List<int> cpuPercentageUsage;
         
-        private List<double> ramUsage;
+        private List<float> ramUsage;
 
         public CustomProcess()
         {
@@ -26,7 +26,7 @@ namespace TaskManager.Utils
         public void ResetRecording()
         {
             cpuPercentageUsage = new List<int>();
-            ramUsage = new List<double>();
+            ramUsage = new List<float>();
         }
     }
 }

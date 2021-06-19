@@ -36,8 +36,21 @@
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
 
+        <lvc:CartesianChart Grid.Column="1" Grid.Row="6" Name="ram" Grid.RowSpan="2"  Series="{Binding RamCollection}">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis x:Name="ramx"/>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis x:Name="ramy"/>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
+
         <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Text="{Binding CurrentProcess.ProcessName, StringFormat=Process: \{0\}}" ></TextBlock>
         <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CpuUsageS, StringFormat=Process cpu usage: \{0\}, Mode=TwoWay}"></TextBlock>
         <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding RamUsageS, StringFormat=Process RAM usage: \{0\}, Mode=TwoWay}"></TextBlock>
+
+        <Button Grid.Row="2" Grid.Column="2" Content="Record" Click="Record_Click" Name="recordBtn"></Button>
+        <Button Grid.Row="4" Grid.Column="2" Content="Save Recording" Click="SaveRecord_Click" Name="saveRecordBtn" IsEnabled="False"></Button>
+        
     </Grid>
 </Window>
