@@ -9,8 +9,10 @@ namespace TaskManager.Models
     {
         // Private
         private string _cpuusageS;
+        private string _ramusageS;
 
         private CustomProcess _customProcess;
+        
         
         // Public
         public Process CurrentProcess { get; }
@@ -21,6 +23,13 @@ namespace TaskManager.Models
             get => _cpuusageS;
 
             set => Set<string>(ref _cpuusageS, value);
+        }
+        
+        public string RamUsageS
+        {
+            get => _ramusageS;
+
+            set => Set<string>(ref _ramusageS, value);
         }
         
         // Methods
@@ -35,10 +44,30 @@ namespace TaskManager.Models
 
         private void Update()
         {
+            PerformanceCounter cpuCounter =
+                new PerformanceCounter("Process", "% Processor Time", CurrentProcess.ProcessName);
+            PerformanceCounter ramCounter =
+                new PerformanceCounter("Process", "Working Set", CurrentProcess.ProcessName);
             while (true)
             {
+                // not thread safe
+                double a = cpuCounter.NextValue(); // must be done twice
+                Thread.Sleep(1000);
+                double ramUsag = ramCounter.NextValue();
+                double cpuPerc = cpuCounter.NextValue();
+
+                CpuUsageS = cpuPerc + "%";
+                RamUsageS = $"{ramUsag / 1048576} MB";
+                // cs
+                lock (_customProcess)
+                {
+                    _customProcess.AddRamValue(ramUsag);
+                    _customProcess.AddCpuValue((int) cpuPerc);    
+                }
                 
             }
+            
+            // auto save ?
         }
         
     }

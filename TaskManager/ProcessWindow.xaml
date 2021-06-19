@@ -26,5 +26,6 @@
         
         <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20" Text="{Binding CurrentProcess.ProcessName, StringFormat=Process: \{0\}}" ></TextBlock>
         <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding CpuUsageS, StringFormat=Process cpu usage: \{0\}, Mode=TwoWay}"></TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding RamUsageS, StringFormat=Process RAM usage: \{0\}, Mode=TwoWay}"></TextBlock>
     </Grid>
 </Window>
