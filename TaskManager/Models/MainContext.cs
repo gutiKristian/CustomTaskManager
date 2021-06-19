@@ -94,9 +94,12 @@ namespace TaskManager.Models
         {
             int current = 0;
             var temp = Process.GetProcesses().ToList();
+            
+            int count = Processes.Count;
+
             while (current < temp.Count)
             {
-                if (current >= Processes.Count)
+                if (current >= count)
                 {
                     Processes.Add(temp[current]);
                 }
@@ -108,13 +111,12 @@ namespace TaskManager.Models
                 ++current;
             }
 
-            int count = Processes.Count;
-            while (current < count)
+
+            for (; current < count - 1; ++current)
             {
-                // Remove old data
                 Processes.RemoveAt(current);
-                ++current;
             }
+            
         }
 
         private void UpdateResourceUsage()

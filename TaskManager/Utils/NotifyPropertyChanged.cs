@@ -9,12 +9,7 @@ namespace TaskManager.Utils
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        
+       
         protected void Set<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
             if (!EqualityComparer<T>.Default.Equals(value, field))

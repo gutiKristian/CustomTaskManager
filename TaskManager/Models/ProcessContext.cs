@@ -45,9 +45,9 @@ namespace TaskManager.Models
         private void Update()
         {
             PerformanceCounter cpuCounter =
-                new PerformanceCounter("Process", "% Processor Time", CurrentProcess.ProcessName);
+                new PerformanceCounter("Process", "% Processor Time", CurrentProcess.ProcessName, true);
             PerformanceCounter ramCounter =
-                new PerformanceCounter("Process", "Working Set", CurrentProcess.ProcessName);
+                new PerformanceCounter("Process", "Working Set", CurrentProcess.ProcessName, true);
             while (true)
             {
                 // not thread safe
@@ -55,8 +55,9 @@ namespace TaskManager.Models
                 Thread.Sleep(1000);
                 double ramUsag = ramCounter.NextValue();
                 double cpuPerc = cpuCounter.NextValue();
-
+                // Enviroment process count
                 CpuUsageS = cpuPerc + "%";
+                
                 RamUsageS = $"{ramUsag / 1048576} MB";
                 // cs
                 lock (_customProcess)
