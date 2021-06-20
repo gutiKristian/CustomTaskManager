@@ -54,7 +54,8 @@ namespace TaskManager.Utils
                 CpuAverage = cpuPercentageUsage.Average(),
                 RamAverage = ramUsage.Average(),
                 CpuMax = cpuPercentageUsage.Max(),
-                RamMax = ramUsage.Max()
+                RamMax = ramUsage.Max(),
+                OverallDuration = Duration
             };
             var json = JsonSerializer.Serialize(data);
             using (StreamWriter streamWriter = new StreamWriter(path))
@@ -65,8 +66,9 @@ namespace TaskManager.Utils
 
         public void GenerateReport()
         {
-            GenerateCsv("C:\\Users\\krist\\Desktop\\record.csv");
-            GenerateJSON("C:\\Users\\krist\\Desktop\\record.json");
+            string path = Directory.GetCurrentDirectory();
+            GenerateCsv(path);
+            GenerateJSON(path);
         }
     }
 }
