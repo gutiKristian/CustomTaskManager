@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace TaskManager.Utils
 {
@@ -46,14 +47,26 @@ namespace TaskManager.Utils
             }
         }
 
+        public void GenerateJSON(string path)
+        {
+            var data = new
+            {
+                CpuAverage = cpuPercentageUsage.Average(),
+                RamAverage = ramUsage.Average(),
+                CpuMax = cpuPercentageUsage.Max(),
+                RamMax = ramUsage.Max()
+            };
+            var json = JsonSerializer.Serialize(data);
+            using (StreamWriter streamWriter = new StreamWriter(path))
+            {
+                streamWriter.Write(json);
+            }
+        }
+
         public void GenerateReport()
         {
             GenerateCsv("C:\\Users\\krist\\Desktop\\record.csv");
-            // average, max, duration
-            float cpuAverage = cpuPercentageUsage.Average();
-            float ramAverage = ramUsage.Average();
-            float cpuMax = cpuPercentageUsage.Max();
-            float ramMax = ramUsage.Max();
+            GenerateJSON("C:\\Users\\krist\\Desktop\\record.json");
         }
     }
 }

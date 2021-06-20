@@ -100,6 +100,7 @@ namespace TaskManager.Models
                 Thread.Sleep(1000);
                 // Get values
                 float ramUsag = ramCounter.NextValue() / 1048576;
+                
                 float cpuPerc = cpuCounter.NextValue();
                 // update graph
                 int cpuP = (int)cpuPerc;
