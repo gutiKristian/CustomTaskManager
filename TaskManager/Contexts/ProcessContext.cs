@@ -6,6 +6,7 @@ using LiveCharts;
 using System.Windows.Data;
 using LiveCharts.Wpf;
 using System;
+using System.Windows;
 
 namespace TaskManager.Models
 {
@@ -14,7 +15,6 @@ namespace TaskManager.Models
         // Private
         private string _cpuusageS;
         private string _ramusageS;
-
         private CustomProcess _customProcess;
 
         private readonly object _itemsLock = new object();
@@ -129,8 +129,16 @@ namespace TaskManager.Models
                             // generate file
                             Record = false;
                             SaveRecord = false;
-                            _customProcess.GenerateReport();
                             _customProcess.Duration = DateTime.Now - RecordStart;
+                            _customProcess.GenerateReport();
+                            // show stats - this is background thread therefore we must do this with dispatcher
+                            Application.Current.Dispatcher.Invoke((Action) delegate
+                            {
+                                
+                                ResultWindow window = new ResultWindow(_customProcess);
+                                window.Show();
+                            });
+                            
                         }
                     }
                     

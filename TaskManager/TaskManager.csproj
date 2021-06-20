@@ -102,6 +102,9 @@
             <SubType>Designer</SubType>
         </ApplicationDefinition>
         <Compile Include="Contexts\ProcessContext.cs" />
+        <Compile Include="ResultWindow.xaml.cs">
+          <DependentUpon>ResultWindow.xaml</DependentUpon>
+        </Compile>
         <Compile Include="Utils\CustomProcess.cs" />
         <Compile Include="Utils\NotifyPropertyChanged.cs" />
         <Compile Include="Utils\WindowsPC.cs" />
@@ -118,6 +121,7 @@
             <SubType>Code</SubType>
         </Compile>
         <Page Include="ProcessWindow.xaml" />
+        <Page Include="ResultWindow.xaml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Contexts\MainContext.cs" />

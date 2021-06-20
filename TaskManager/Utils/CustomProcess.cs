@@ -8,9 +8,9 @@ namespace TaskManager.Utils
 {
     public class CustomProcess
     {
-        private List<float> cpuPercentageUsage;
-        
-        private List<float> ramUsage;
+        public List<float> cpuPercentageUsage { get; private set; }
+
+        public List<float> ramUsage { get; private set; }
 
         public TimeSpan Duration { get; set; }
 
@@ -66,9 +66,11 @@ namespace TaskManager.Utils
 
         public void GenerateReport()
         {
-            string path = Directory.GetCurrentDirectory();
-            GenerateCsv(path);
-            GenerateJSON(path);
+            string path = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "report_" +
+                          DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
+            path = "C:\\Users\\krist\\Desktop\\report";
+            GenerateCsv(path + ".csv");
+            GenerateJSON(path + ".json");
         }
     }
 }
