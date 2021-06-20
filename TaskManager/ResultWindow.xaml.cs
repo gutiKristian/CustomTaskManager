@@ -26,6 +26,12 @@ namespace TaskManager
             CpuMax = Math.Round(_customProcess.cpuPercentageUsage.Max(), 2).ToString();
             RamMax = Math.Round(_customProcess.ramUsage.Max(), 2).ToString();
             Duration = _customProcess.Duration.Seconds.ToString();
+
+            CPUAVERAGE.Text = $"CPU AVERAGE: {CpuPercentage}%";
+            CPUMAX.Text = $"CPU MAX: {CpuPercentage}%";
+            RAMAVERAGE.Text = $"RAM AVERAGE: {RamAverage}%";
+            RAMMAX.Text = $"RAM MAX: {RAMMAX}%";
+            DURATION.Text = $"DURATION: {Duration} seconds";
         }
     }
 }

@@ -7,6 +7,29 @@
         mc:Ignorable="d"
         Title="ResultWindow" Height="450" Width="800">
     <Grid>
-        <TextBlock Text="{Binding CpuPercentage}"></TextBlock>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="1" Grid.Column="1" x:Name="CPUAVERAGE"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="1" x:Name="CPUMAX"></TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" x:Name="RAMAVERAGE"></TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="1" x:Name="RAMMAX"></TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="1" x:Name="DURATION"></TextBlock>
     </Grid>
 </Window>
