@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -7,8 +8,10 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using TaskManager.Models;
 using System.Diagnostics;
+using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace TaskManager
 {
@@ -65,6 +68,27 @@ namespace TaskManager
             // register events for exit the dialog and also exit process -> generate log file
             ProcessWindow processWindow = new ProcessWindow(data);
             processWindow.Show();
+        }
+    }
+
+    public class MemoryConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+            {
+                return 0;
+            }
+            return  (long) value / 1048576;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value == null)
+            {
+                return 0;
+            }
+            return (long) value * 1048576;
         }
     }
 }

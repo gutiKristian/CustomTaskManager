@@ -8,6 +8,10 @@
         mc:Ignorable="d"
         Title="PV178 Task Manager" MinHeight="400" MinWidth="600" Height="800" Width="1000">
     
+    <Window.Resources>
+        <local:MemoryConverter x:Key="MemoryConverter" />
+    </Window.Resources>
+    
     <Grid>
         <!-- LAYOUT DEFINITION -->
         <Grid.ColumnDefinitions>
@@ -65,7 +69,7 @@
                 <DataGridTextColumn Header="PID" Binding="{Binding Id}" Width="*" />
                 <DataGridTextColumn Header="Process Name" Binding="{Binding ProcessName}" Width="*"/>
                 <DataGridTextColumn Header="Base Priority" Binding="{Binding BasePriority}" Width="*"/>
-                <DataGridTextColumn Header="Physical Memory Usage" Binding="{Binding WorkingSet64}" Width="*"/>
+                <DataGridTextColumn Header="Physical Memory Usage" Binding="{Binding WorkingSet64, StringFormat=\{0\} MB, Converter={StaticResource MemoryConverter}}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
        

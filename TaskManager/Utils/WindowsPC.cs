@@ -28,7 +28,7 @@ namespace TaskManager.Utils
             PcName = ExtractWin32Information("Win32_Processor", "SystemName");
             // Memory visible to OS
             RamCapacity = ExtractWin32Information("Win32_OperatingSystem", "TotalVisibleMemorySize");
-            fRamCapacity = Double.Parse(RamCapacity) / 1024;
+            fRamCapacity = Math.Round(Double.Parse(RamCapacity) / 1024, 2);
             RamCapacity = fRamCapacity.ToString() + "MB";
         }
 
