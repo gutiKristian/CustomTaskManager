@@ -28,9 +28,9 @@ namespace TaskManager
             Duration = _customProcess.Duration.Seconds.ToString();
 
             CPUAVERAGE.Text = $"CPU AVERAGE: {CpuPercentage}%";
-            CPUMAX.Text = $"CPU MAX: {CpuPercentage}%";
-            RAMAVERAGE.Text = $"RAM AVERAGE: {RamAverage}%";
-            RAMMAX.Text = $"RAM MAX: {RAMMAX}%";
+            CPUMAX.Text = $"CPU MAX: {CpuMax}%";
+            RAMAVERAGE.Text = $"RAM AVERAGE: {RamAverage}MB";
+            RAMMAX.Text = $"RAM MAX: {RAMMAX}MB";
             DURATION.Text = $"DURATION: {Duration} seconds";
         }
     }
