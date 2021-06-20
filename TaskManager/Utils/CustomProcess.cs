@@ -68,7 +68,7 @@ namespace TaskManager.Utils
         {
             string path = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "report_" +
                           DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
-            path = "C:\\Users\\krist\\Desktop\\report";
+            // path = "CUSTOM PATH";
             GenerateCsv(path + ".csv");
             GenerateJSON(path + ".json");
         }
