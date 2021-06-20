@@ -101,7 +101,7 @@
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
-        <Compile Include="Models\ProcessContext.cs" />
+        <Compile Include="Contexts\ProcessContext.cs" />
         <Compile Include="Utils\CustomProcess.cs" />
         <Compile Include="Utils\NotifyPropertyChanged.cs" />
         <Compile Include="Utils\WindowsPC.cs" />
@@ -120,7 +120,7 @@
         <Page Include="ProcessWindow.xaml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="Models\MainContext.cs" />
+        <Compile Include="Contexts\MainContext.cs" />
         <Compile Include="ProcessWindow.xaml.cs">
           <DependentUpon>ProcessWindow.xaml</DependentUpon>
         </Compile>
